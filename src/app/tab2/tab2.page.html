@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      t2 title
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<h3>11111</h3>
+<ion-content>
+  <h3>Wayne's bus</h3>
+  <div>{{platform.name}}</div>
+  <div *ngFor="let route of platform.routes">
+    <div>{{route.number}} | {{route.name}} | {{route.destination}}</div>
+    <div *ngFor="let trip of route.trips">{{trip.eta}} min</div>
+  </div>
+</ion-content>
+
+<h3>22</h3>

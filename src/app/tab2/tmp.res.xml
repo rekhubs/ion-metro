@@ -1,0 +1,56 @@
+<JPRoutePositionET2 xmlns="urn:connexionz-co-nz:jp" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:connexionz-co-nz:jp JourneyPlanner.xsd">
+	<Content Expires="2019-08-10T18:39:01+12:00" MaxArrivalScope="60"/>
+	<Platform PlatformTag="1500" Name="Riccarton Rd near Wainui St">
+		<Route RouteNo="80" Name="Lincoln/Parklands">
+			<Destination Name="Parklands via City">
+				<Trip ETA="45" TripID="1974" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="100" Name="Wigram/The Palms">
+			<Destination Name="The Palms">
+				<Trip ETA="1" TripID="4495" WheelchairAccess="true"/>
+				<Trip ETA="29" TripID="4523" WheelchairAccess="true"/>
+				<Trip ETA="56" TripID="4482" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="120" Name="Burnside/Spreydon">
+			<Destination Name="Spreydon & Barrington">
+				<Trip ETA="8" TripID="4454"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="130" Name="Hei Hei/Avonhead">
+			<Destination Name="Avonhead">
+				<Trip ETA="2" TripID="92" WheelchairAccess="true"/>
+				<Trip ETA="31" TripID="1835" WheelchairAccess="true"/>
+				<Trip ETA="58" TripID="52" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="Oa" Name="Orbiter">
+			<Destination Name="Orbiter via Barrington">
+				<Trip ETA="6" TripID="2437" WheelchairAccess="true"/>
+				<Trip ETA="21" TripID="2479" WheelchairAccess="true"/>
+				<Trip ETA="35" TripID="2512" WheelchairAccess="true"/>
+				<Trip ETA="49" TripID="2523" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="P" Name="Purple Line">
+			<Destination Name="Sumner via City">
+				<Trip ETA="19" TripID="2964" WheelchairAccess="true"/>
+				<Trip ETA="47" TripID="2946" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Route RouteNo="Y" Name="Yellow Line">
+			<Destination Name="New Brighton via City">
+				<Trip ETA="2" TripID="1263" WheelchairAccess="true"/>
+				<Trip ETA="13" TripID="1816" WheelchairAccess="true"/>
+				<Trip ETA="36" TripID="1876" WheelchairAccess="true"/>
+			</Destination>
+		</Route>
+		<Alert ValidFrom="2017-12-19" ValidTo="2019-12-25" Title="Notification">
+			<Detail>
+				Express trip rules - Buses travelling to the city do not pick up after Denton Park, Hornby (drop offs only). Buses travelling to Rolleston do not drop off before the Hub Hornby (pick ups only).
+			</Detail>
+			<Route RouteNo="Y"/>
+		</Alert>
+	</Platform>
+</JPRoutePositionET2>
