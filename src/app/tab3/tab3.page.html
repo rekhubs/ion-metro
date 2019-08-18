@@ -6,4 +6,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <h3>testing data:</h3>
+  <div>data: {{name}}</div>
+  <br/>-- getting info using ionic/cordova http module --<br/>
+  <h3>Wayne's bus</h3>
+  <div>{{platform.name}}</div>
+  <div *ngFor="let route of platform.routes">
+    <div>{{route.number}} | {{route.name}} | {{route.destination}}</div>
+    <div *ngFor="let trip of route.trips">{{trip.eta}} min</div>
+  </div>
+</ion-content>

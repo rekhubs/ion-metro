@@ -6,6 +6,7 @@ import { stringify } from '@angular/compiler/src/util';
 import { Trip } from '../models/Trip';
 import { Route } from '../models/Route';
 import { Platform } from '../models/Platform';
+import { TransitUtil } from '../services/transit.util';
 
 @Component({
   selector: 'app-tab2',
@@ -24,7 +25,7 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
 
     let url = 'https://reqres.in/api/users';
-    this.http.get(url).subscribe(resp => {
+    this.http.get<any>(url).subscribe(resp => {
       console.log('got data!', resp);
       this.name = resp.data[0].email;
     }, e => {
@@ -132,7 +133,7 @@ export class Tab2Page implements OnInit {
       console.log('\n\n\n\nonline eta xml parsed:', eta);
 
 
-      const overalParsedObj = this.parsePlatform(eta.JPRoutePositionET2.Platform);
+      const overalParsedObj = TransitUtil.parsePlatform(eta.JPRoutePositionET2.Platform);
       console.log('\n\n\neta parsed to json:', overalParsedObj);
       this.platform = overalParsedObj;
 
@@ -146,65 +147,6 @@ export class Tab2Page implements OnInit {
   }
 
 
-  parseTrip(obj): Trip {
-    const trip = new Trip();
-    const attr = obj.attr;
-    trip.eta = attr['@_ETA'];
-    trip.id = attr['@_TripID'];
-    trip.wheelchairAccess = attr['@_WheelchairAccess'];
-    return trip;
-  }
-
-  parseRouteWithDest(obj, refRoute: Route): Route {
-    const route = Object.assign(new Route(), refRoute);
-    route.destination = obj.attr['@_Name'];
-    route.trips = [];
-
-    if ( !Array.isArray(obj.Trip)) {
-      route.trips.push(this.parseTrip(obj.Trip));
-    } else {
-      obj.Trip.forEach(tr => {
-        route.trips.push(this.parseTrip(tr));
-      });
-    }
-    return route;
-  }
-
-  parseRoute(obj): Route[] {
-    const routes = [];
-    const route = new Route();
-    route.number = obj.attr['@_RouteNo'];
-    route.name = obj.attr['@_Name'];
-
-    const destTag = obj.Destination;
-    if (!Array.isArray(destTag)) {
-      routes.push(this.parseRouteWithDest(destTag, route));
-    } else {
-      destTag.forEach(r => {
-        routes.push(this.parseRouteWithDest(r, route));
-      });
-    }
-    return routes;
-  }
-
-  parsePlatform(obj): Platform {
-    const platform = new Platform();
-    platform.name = obj.attr['@_Name'];
-    platform.tag = obj.attr['@_PlatformTag'];
-    platform.routes = [];
-
-    let rawRoutes = [];
-    if (!Array.isArray(obj.Route)) {
-      rawRoutes.push(obj.Route);
-    } else {
-      rawRoutes = obj.Route;
-    }
-    rawRoutes.forEach(routes => {
-      this.parseRoute(routes).forEach(route => {
-        platform.routes.push(route);
-      });
-    });
-    return platform;
-  }
+  
 
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { HTTP } from '@ionic-native/http/ngx';
 import { HttpClientModule } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 
@@ -22,6 +23,7 @@ import { Tab2Page } from './tab2/tab2.page';
     AppRoutingModule],
   providers: [
     StatusBar,
+    HTTP,
     SplashScreen,
     Tab2Page,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
