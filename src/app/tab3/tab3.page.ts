@@ -84,6 +84,11 @@ export class Tab3Page implements OnInit {
     const params = {};
     const headers = {};
     try {
+      this.http.setSSLCertMode('nocheck').then(res => {
+        console.log('cordova http: set ssl no check, suc');
+      }, e => {
+        console.error('cordova http: failed to set ssl no check');
+      });
       const response = await this.http.get(url, params, headers);
 
       const eta = parse(stringify(response.data), xmlOpts);
