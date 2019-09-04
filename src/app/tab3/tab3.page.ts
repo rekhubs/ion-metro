@@ -19,7 +19,10 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.getBusInfo();
+    setInterval(() => {
+      this.getBusInfo();
+    }, 20 * 1000);
+    // this.getBusInfo();
   }
 
   async getData() {
