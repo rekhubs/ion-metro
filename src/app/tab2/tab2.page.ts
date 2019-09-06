@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'fast-xml-parser';
 import { parse } from 'fast-xml-parser';
+import anime from 'animejs/lib/anime.es.js';
+
 import { stringify } from '@angular/compiler/src/util';
 import { Trip } from '../models/Trip';
 import { Route } from '../models/Route';
 import { Platform } from '../models/Platform';
 import { TransitUtil } from '../services/transit.util';
+
+
 
 @Component({
   selector: 'app-tab2',
@@ -30,6 +34,37 @@ export class Tab2Page implements OnInit {
       this.name = resp.data[0].email;
     }, e => {
       console.log('error getting data!', e);
+    });
+
+    anime({
+      targets: 'path',
+      strokeDashoffset: function(el) {
+        var pathLength = el.getTotalLength();
+        el.setAttribute('stroke-dasharray', pathLength);
+        return [-pathLength, 0];
+      },
+      stroke: {
+        value: function(el, i) {
+          return 'rgb(200,'+ i * 8 +',150)'; 
+        },
+        easing: 'linear',
+        duration: 2000,
+      },
+      strokeWidth: {
+        value: 6,
+        easing: 'linear',
+        delay: function(el, i) { 
+          return 1200 + (i * 40); 
+        },
+        duration: 800,
+      },
+      delay: function(el, i) { 
+        return i * 60; 
+      },
+      duration: 1200,
+      easing: 'easeOutExpo',
+      loop: true,
+      direction: 'alternate'
     });
 
 
