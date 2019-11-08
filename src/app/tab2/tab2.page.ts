@@ -40,18 +40,20 @@ export class Tab2Page implements OnInit {
       targets: 'path',
       strokeDashoffset: function(el) {
         var pathLength = el.getTotalLength();
+        console.log('lenght:', pathLength);
         el.setAttribute('stroke-dasharray', pathLength);
         return [-pathLength, 0];
       },
       stroke: {
         value: function(el, i) {
-          return 'rgb(200,'+ i * 8 +',150)'; 
+          console.log('in stroke: i:', i, 'rgb(200,'+ i * 60 +',150)');
+          return 'rgb(200,'+ i * 60 +',150)'; 
         },
         easing: 'linear',
         duration: 2000,
       },
       strokeWidth: {
-        value: 6,
+        value: 6 + 8,
         easing: 'linear',
         delay: function(el, i) { 
           return 1200 + (i * 40); 
