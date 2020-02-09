@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Storage } from '@ionic/storage';
 import 'fast-xml-parser';
 import { parse } from 'fast-xml-parser';
 import { stringify } from '@angular/compiler/src/util';
@@ -19,10 +20,20 @@ export class Tab2Page implements OnInit {
   platform = new Platform();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private storage: Storage
   ) { }
 
   ngOnInit(): void {
+
+    // testing ionic storage
+    this.storage.set('mystop1', 17085);
+    this.storage.get('mystop1').then(val => {
+      console.log('get stop data from ionic storage:', val);
+    }, e => {
+      console.error('cannot get data from storage!', e);
+    });
+
 
     let url = 'https://reqres.in/api/users';
     this.http.get<any>(url).subscribe(resp => {
@@ -126,20 +137,27 @@ export class Tab2Page implements OnInit {
     // url = 'http://rtt.metroinfo.org.nz/rtt/public/utility/file.aspx?ContentType=SQLXML&Name=JPRoutePositionET2&PlatformNo=' + myStop;
 
     const httpOpts: Object = {responseType: 'text'};
-    this.http.get(url, httpOpts).subscribe(resp => {
-      console.log('got eta raw return!', resp);
 
-      eta = parse(stringify(resp), xmlOpts);
-      console.log('\n\n\n\nonline eta xml parsed:', eta);
+    setInterval(() => {
+      console.log('now pulling bus data...');
+      this.http.get(url, httpOpts).subscribe(resp => {
+        console.log('got eta raw return!', resp);
+  
+        eta = parse(stringify(resp), xmlOpts);
+        console.log('\n\n\n\nonline eta xml parsed:', eta);
+  
+  
+        const overalParsedObj = TransitUtil.parsePlatform(eta.JPRoutePositionET2.Platform);
+        console.log('\n\n\neta parsed to json:', overalParsedObj);
+        this.platform = overalParsedObj;
+  
+      }, e => {
+        console.log('error getting eta!', e);
+      });
 
+    }, 15000);
 
-      const overalParsedObj = TransitUtil.parsePlatform(eta.JPRoutePositionET2.Platform);
-      console.log('\n\n\neta parsed to json:', overalParsedObj);
-      this.platform = overalParsedObj;
-
-    }, e => {
-      console.log('error getting eta!', e);
-    });
+    
 
 
 

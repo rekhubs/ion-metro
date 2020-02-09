@@ -9,9 +9,27 @@
 <ion-content>
   <h3>Wayne's bus</h3>
   <div>{{platform.name}}</div>
+
+
+
+
   <div *ngFor="let route of platform.routes">
-    <div>{{route.number}} | {{route.name}} | {{route.destination}}</div>
-    <div *ngFor="let trip of route.trips">{{trip.eta}} min</div>
+
+    <!-- <div>{{route.number}} | {{route.name}} | {{route.destination}}</div>
+    <div *ngFor="let trip of route.trips">{{trip.eta}} min</div> -->
+
+
+
+    <div *ngFor="let trip of route.trips">
+      <ion-item>
+        <ion-label>
+          {{trip.eta}} min | {{route.number}} | {{route.name}}
+          <div style="font-size: 8px;">{{route.destination}}</div>
+        </ion-label>
+      </ion-item>
+    </div>
+
+
   </div>
 </ion-content>
 

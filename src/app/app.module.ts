@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -20,6 +21,7 @@ import { Tab2Page } from './tab2/tab2.page';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule],
   providers: [
     StatusBar,
