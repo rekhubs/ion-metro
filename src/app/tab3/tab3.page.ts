@@ -67,7 +67,7 @@ export class Tab3Page implements OnInit {
       // attrValueProcessor: a => he.decode(a, {isAttributeValue: true}),//default is a=>a
       // tagValueProcessor : a => he.decode(a) //default is a=>a
     };
-    
+
 
 
 
@@ -83,11 +83,13 @@ export class Tab3Page implements OnInit {
 
     // url = 'http://rtt.metroinfo.org.nz/rtt/public/utility/file.aspx?ContentType=SQLXML&Name=JPRoutePositionET2&PlatformNo=' + myStop;
 
-    
+
     const params = {};
     const headers = {};
     try {
-      this.http.setSSLCertMode('nocheck').then(res => {
+
+      this.http.setServerTrustMode('nocheck').then(res => {
+        // this.http.setSSLCertMode('nocheck').then(res => {
         console.log('cordova http: set ssl no check, suc');
       }, e => {
         console.error('cordova http: failed to set ssl no check');
@@ -102,7 +104,7 @@ export class Tab3Page implements OnInit {
     } catch (err) {
       console.error(err);
     }
-    
+
   }
 
 
