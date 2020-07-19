@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './folder/home/home.component';
 
 // const routes: Routes = [
 //   {
@@ -9,13 +10,23 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 // ];
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'folder/Inbox',
+  //   pathMatch: 'full'
+  // },
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'folder/home',
     pathMatch: 'full'
   },
+  // {
+  //   path: 'folder/home',
+  //   component: HomeComponent
+  // },
   {
-    path: 'folder/:id',
+    path: 'folder',
+    // path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   }
 ];

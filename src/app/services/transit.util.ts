@@ -4,6 +4,24 @@ import { Platform } from '../models/Platform';
 
 export class TransitUtil {
 
+    public static readonly xmlOpts = {
+        attributeNamePrefix: '@_',
+        attrNodeName: 'attr', // default is 'false'
+        textNodeName: '#text',
+        ignoreAttributes: false,
+        ignoreNameSpace: false,
+        allowBooleanAttributes: false,
+        parseNodeValue: true,
+        parseAttributeValue: false,
+        trimValues: true,
+        cdataTagName: '__cdata', // default is 'false'
+        cdataPositionChar: '\\c',
+        localeRange: '', // To support non english character in tag/attribute values.
+        parseTrueNumberOnly: false,
+        attrValueProcessor: a => a.replace(/&amp;/g, '&'), // default is a=>a
+        tagValueProcessor: a => a.replace(/&amp;/g, '&') // default is a=>a
+    };
+
     static parseTrip(obj): Trip {
         const trip = new Trip();
         const attr = obj.attr;

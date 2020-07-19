@@ -3,21 +3,34 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title >
+      <span style="vertical-align: middle; padding-left: 10px;">Information</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div>
+    <h4 style="margin: 14px;">where to find stop number</h4>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>testing ion-content</p>
-    <ion-icon name="alarm-outline"></ion-icon>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-card>
+      <ion-card-content>
+        <a target="_blank" rel="noopener noreferrer" href="http://rtt.metroinfo.org.nz/rtt/public/">
+          http://rtt.metroinfo.org.nz/rtt/public/</a>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <a target="_blank" rel="noopener noreferrer" href="https://moovitapp.com/index/en-gb/public_transportation-lines-Christchurch-2202-776157">
+          https://moovitapp.com/index/en-gb/public_transportation-lines-Christchurch-2202-776157</a>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <a target="_blank" rel="noopener noreferrer" href="https://opendata.canterburymaps.govt.nz/datasets/bus-stops/data">
+          https://opendata.canterburymaps.govt.nz/datasets/bus-stops/data</a>
+      </ion-card-content>
+    </ion-card>
+
   </div>
 </ion-content>

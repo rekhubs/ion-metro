@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title >
+      <ion-icon ios="bus-outline" md="bus-sharp" style="vertical-align: middle;"></ion-icon>
+      <span style="vertical-align: middle; padding-left: 10px;">Ion Metro Web</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div style="height: 4px;">
+  <ion-progress-bar *ngIf="progressing" type="indeterminate"></ion-progress-bar>
+</div>
+
+<ion-content>
+  <section style="padding: 0 10px 0 10px;">
+    <div style="display: flex; flex-direction:row; 
+      align-items: flex-end; justify-content:space-between">
+      <div style="flex: 1.5 1 0;"></div>
+      <ion-item style="width: 140px; margin-right: 10px;">
+        <ion-label position="floating">Bus Stop</ion-label>
+        <ion-input clearInput placeholder="#stop" [(ngModel)]="stop"></ion-input>
+      </ion-item>
+      <ion-button fill="outline" (click)="changeStop()">Set</ion-button>
+    </div>
+
+
+    <h5>{{platform.name}}</h5>
+    <div *ngFor="let route of platform.routes">
+
+      <!-- <div>{{route.number}} | {{route.name}} | {{route.destination}}</div>
+      <div *ngFor="let trip of route.trips">{{trip.eta}} min</div> -->
+
+
+
+      <div *ngFor="let trip of route.trips">
+        <ion-item>
+          <ion-label>
+            {{trip.eta}} min · {{route.number}} 
+            <div style="font-size: 13px; color: grey;">
+              <i>to</i> {{route.destination}}
+              <!-- <span>{{route.name}}</span> -->
+            </div>
+          </ion-label>
+        </ion-item>
+      </div>
+
+
+    </div>
+
+
+  </section>
+</ion-content>

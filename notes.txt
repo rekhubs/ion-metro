@@ -1,0 +1,38 @@
+
+============ debugging ===========
+https://ionicframework.com/docs/building/android
+
+1. debug + live reload
+ionic cordova run android -l
+
+chrome://inspect/#devices
+
+
+
+================== release ========================
+https://ionicframework.com/docs/publishing/play-store
+
+1. apk
+ionic cordova build android --prod --release
+ionic cordova build android --prod --release --verbose
+
+generated in: (depending on config)
+/Users/rek/playground/mobile/ionic/ion-metro/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+
+2. sign apk
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore output/app-release-unsigned.apk alias_name
+
+~/library/android/sdk/build-tools/29.0.1/zipalign -v 4 output/app-release-unsigned.apk  output/xxx.apk
+
+// ref: ~/Library/Android/sdk/build-tools/VERSION/zipalign
+// e.g. zipalign -v 4 HelloWorld-release-unsigned.apk HelloWorld.apk
+
+
+=========== installation ================
+
+1. adb uninstall
+Sometime "app not installed", may be caused by debug version or previous app not uninstalled cleanly, try:
+adb uninstall io.ionic.starter   (app package name)
+
+https://stackoverflow.com/a/50610997/2893542
+

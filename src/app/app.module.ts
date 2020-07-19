@@ -12,11 +12,16 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Tab2Page } from './tab2/tab2.page';
+import { HomeComponent } from './folder/home/home.component';
+import { FolderPageModule } from './folder/folder.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent
+  ],
+  entryComponents: [
+
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -27,7 +32,6 @@ import { Tab2Page } from './tab2/tab2.page';
     StatusBar,
     HTTP,
     SplashScreen,
-    Tab2Page,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

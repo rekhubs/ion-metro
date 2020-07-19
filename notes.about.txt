@@ -1,0 +1,16 @@
+
+--- for
+* learn Ionic
+* know and hands on whole process: Angular --> Ionic --> Cordova --> Android package
+* full but simple interaction for at least one function to end user
+
+--- learned / techs used
+* storage
+
+--- to improve / better to have / to-do - a lot
+* move "folder" stuff in a component or page like "favorites", and flatten routing structure to 1 layer
+* menu bars, menu names to be corrected
+* drag to refresh
+* map view
+* search history
+* guess stops

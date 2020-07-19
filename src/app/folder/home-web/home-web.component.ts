@@ -1,27 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform } from 'src/app/models/Platform';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
-import 'fast-xml-parser';
 import { parse } from 'fast-xml-parser';
-
-
 import { stringify } from '@angular/compiler/src/util';
-import { Trip } from '../models/Trip';
-import { Route } from '../models/Route';
-import { Platform } from '../models/Platform';
-import { TransitUtil } from '../services/transit.util';
+import { TransitUtil } from 'src/app/services/transit.util';
 
 
+
+
+// import 'fast-xml-parser';
+
+
+import { Trip } from '../../models/Trip';
+import { Route } from '../../models/Route';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-home-web',
+  templateUrl: './home-web.component.html',
+  styleUrls: ['./home-web.component.scss'],
 })
-export class Tab2Page implements OnInit {
+export class HomeWebComponent implements OnInit {
 
   name = 'init displayed string';
   platform = new Platform();
+  stop = 17085;
+
+  progressing = false;
 
   constructor(
     private http: HttpClient,
@@ -31,12 +36,15 @@ export class Tab2Page implements OnInit {
   ngOnInit(): void {
 
     // testing ionic storage
-    this.storage.set('mystop1', 17085);
+    // this.storage.set('mystop1', 17085);
     this.storage.get('mystop1').then(val => {
       console.log('get stop data from ionic storage:', val);
+      this.stop = val;
+      this.pullBusUpdate();
     }, e => {
       console.error('cannot get data from storage!', e);
     });
+
 
 
     const url = 'https://reqres.in/api/users';
@@ -56,48 +64,33 @@ export class Tab2Page implements OnInit {
 
 
 
-    this.pullBusUpdate();
+    // this.pullBusUpdate();
     setInterval(() => {
       this.pullBusUpdate();
-    }, 15000);
-
-
-
-
-
-
+    }, 15000 * 1000);
   }
+
+
+
+  changeStop() {
+    console.log('say something, hahaahahha!');
+    console.log('what is this.stop now:', this.stop);
+    this.pullBusUpdate();
+    this.storage.set('mystop1', this.stop).then(_ => {});
+  }
+
 
   pullBusUpdate() {
 
-    const xmlOpts = {
-      attributeNamePrefix: '@_',
-      attrNodeName: 'attr', // default is 'false'
-      textNodeName: '#text',
-      ignoreAttributes: false,
-      ignoreNameSpace: false,
-      allowBooleanAttributes: false,
-      parseNodeValue: true,
-      parseAttributeValue: false,
-      trimValues: true,
-      cdataTagName: '__cdata', // default is 'false'
-      cdataPositionChar: '\\c',
-      localeRange: '', // To support non english character in tag/attribute values.
-      parseTrueNumberOnly: false,
-      // attrValueProcessor: a => he.decode(a, {isAttributeValue: true}),//default is a=>a
-      // tagValueProcessor : a => he.decode(a) //default is a=>a
-    };
-    // let eta = parse(xml, xmlOpts);
-    // console.log('\n\n\n\neta xml parsed:', eta);
-
-
+    this.progressing = true;
 
     const myStop = '10003';
     const golfCourseStop = '17085';
     const exChangeB = '53116';
 
     // --------- get xml and parse
-    const url = 'http://rtt.metroinfo.org.nz/rtt/public/utility/file.aspx?ContentType=SQLXML&Name=JPRoutePositionET2&PlatformNo=' + golfCourseStop;
+    let url = 'http://rtt.metroinfo.org.nz/rtt/public/utility/' +
+    'file.aspx?ContentType=SQLXML&Name=JPRoutePositionET2&PlatformNo=' + this.stop;
 
     // url = 'http://rtt.metroinfo.org.nz/rtt/public/utility/file.aspx?ContentType=SQLXML&Name=JPRoutePositionET2&PlatformNo=' + exChangeB;
 
@@ -109,7 +102,7 @@ export class Tab2Page implements OnInit {
     this.http.get(url, httpOpts).subscribe(resp => {
       console.log('got eta raw return!', resp);
 
-      const eta = parse(stringify(resp), xmlOpts);
+      const eta = parse(stringify(resp), TransitUtil.xmlOpts);
       console.log('\n\n\n\nonline eta xml parsed:', eta);
 
 
@@ -117,13 +110,13 @@ export class Tab2Page implements OnInit {
       console.log('\n\n\neta parsed to json:', overalParsedObj);
       this.platform = overalParsedObj;
 
+      this.progressing = false;
     }, e => {
       console.log('error getting eta!', e);
+      this.progressing = false;
     });
 
   }
 
-
-
-
 }
+
