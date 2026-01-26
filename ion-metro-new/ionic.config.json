@@ -1,0 +1,7 @@
+{
+  "name": "ion-metro-new",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
